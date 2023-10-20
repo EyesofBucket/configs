@@ -51,11 +51,15 @@ cp ./dotfiles/vimrc $HOME/.vimrc
 cp ./dotfiles/alias.sh $config_dir/alias.sh
 cp ./dotfiles/eyesofbucket.omp.json $config_dir/eyesofbucket.omp.json
 cp ./dotfiles/tmux.conf $HOME/.tmux.conf
-cp -r ./dotfiles/nvim $config_dir/nvim
+mkdir $HOME/.config/nvim
+cp -r ./dotfiles/nvim/* $HOME/.config/nvim
 
 # Install vim plugins as listed in the config file
 vim --not-a-term -c "PlugInstall" -c "%w /tmp/vim.log" -c "qa" >/dev/null
 cat /tmp/vim.log
+
+# Install neovim plugins
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 if [ "$all" = true ]; then
   cp ./dotfiles/sudoers_eyesofbucket /etc/sudoers.d/eyesofbucket
