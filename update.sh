@@ -50,6 +50,8 @@ cp ./dotfiles/zshrc $HOME/.zshrc
 cp ./dotfiles/vimrc $HOME/.vimrc
 cp ./dotfiles/alias.sh $config_dir/alias.sh
 cp ./dotfiles/eyesofbucket.omp.json $config_dir/eyesofbucket.omp.json
+cp ./dotfiles/tmux.conf $HOME/.tmux.conf
+cp -r ./dotfiles/nvim $config_dir/nvim
 
 # Install vim plugins as listed in the config file
 vim --not-a-term -c "PlugInstall" -c "%w /tmp/vim.log" -c "qa" >/dev/null

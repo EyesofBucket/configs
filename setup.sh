@@ -2,12 +2,12 @@
 
 branch="main"
 all=""
+packages='curl wget zsh git vim neovim tmux'
 
 usage(){
 >&2 cat << EOF
 Usage: setup.sh [-a]
 EOF
-exit 1
 }
 
 # Arg validation
@@ -21,34 +21,33 @@ eval set -- ${args}
 while :
 do
   case $1 in
-    -a | --all)  all="-a" ; shift ;;
-    -h | --help) usage     ; shift ;;
+    -a | --all)  all="-a"   ; shift ;;
+    -h | --help) usage; exit; shift ;;
     # -- means the end of the arguments. Shift and break out of the while loop
     --) shift; break ;;
     *) >&2 echo Unsupported option: $1
-       usage ;;
+       usage; exit 1 ;;
   esac
 done
 
+# Check for root
 if [ "$EUID" -ne 0 ]; then
   echo "Must be run as root!"
   exit 1
 fi
 
-# Install requirements
-PACKAGES='curl wget zsh git vim'
-
+# Install packages
 # Debian
 if which apt >/dev/null; then
-  apt install -y $PACKAGES
+  apt install -y $packages
 
 # Fedora
 elif which yum >/dev/null; then
-  yum install -y $PACKAGES
+  yum install -y $packages
 
 # Arch
 elif which pacman >/dev/null; then
-  pacman -S --noconfirm $PACKAGES
+  pacman -S --noconfirm $packages
 else
   printf "\033[0;31mUnable to install requirements: No package manager found.\033[0m\n" 1>&2
   exit 1
@@ -67,6 +66,9 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 declare -A arch=( ['x86_64']='amd64' ['aarch64']='arm64' ['armv71']='arm' )
 wget "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-${arch[$(uname -m)]}" -O /usr/local/bin/oh-my-posh
 chmod a+rx /usr/local/bin/oh-my-posh
+
+# Install tmux plugin manager
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 
 # Install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
