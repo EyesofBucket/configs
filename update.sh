@@ -40,15 +40,15 @@ cp ./dotfiles/zshrc $HOME/.zshrc
 cp ./dotfiles/vimrc $HOME/.vimrc
 
 # bvkt
-if [ ! -f $XDG_CONFIG_HOME/bvkt ]; then; mkdir -p $XDG_CONFIG_HOME/bvkt; fi
+if [ ! -f $XDG_CONFIG_HOME/bvkt ]; then mkdir -p $XDG_CONFIG_HOME/bvkt; fi
 cp -r ./dotfiles/bvkt/* $XDG_CONFIG_HOME/bvkt
 
 # tmux
-if [ ! -f $XDG_CONFIG_HOME/tmux ]; then; mkdir -p $XDG_CONFIG_HOME/tmux; fi
+if [ ! -f $XDG_CONFIG_HOME/tmux ]; then mkdir -p $XDG_CONFIG_HOME/tmux; fi
 cp -r ./dotfiles/tmux/* $XDG_CONFIG_HOME/tmux
 
 # nvim
-if [ ! -f $XDG_CONFIG_HOME/nvim ]; then; mkdir -p $XDG_CONFIG_HOME/nvim; fi
+if [ ! -f $XDG_CONFIG_HOME/nvim ]; then mkdir -p $XDG_CONFIG_HOME/nvim; fi
 cp -r ./dotfiles/nvim/* $XDG_CONFIG_HOME/nvim
 
 # Add custom config template if it hasn't already been created
