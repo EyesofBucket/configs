@@ -30,7 +30,7 @@ autoload run-help
 # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo dirhistory history zsh-autosuggestions jsontools)
+plugins=(git sudo dirhistory history jsontools zsh-autosuggestions zsh-syntax-highlighting)
 
 # oh-my-posh setup
 eval "$(oh-my-posh init zsh --config ~/.config/bvkt/eyesofbucket.omp.json)"
