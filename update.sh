@@ -51,7 +51,11 @@ cp ./dotfiles/vimrc $HOME/.vimrc
 cp ./dotfiles/alias.sh $config_dir/alias.sh
 cp ./dotfiles/eyesofbucket.omp.json $config_dir/eyesofbucket.omp.json
 cp ./dotfiles/tmux.conf $HOME/.tmux.conf
-mkdir $HOME/.config/nvim
+
+if [ ! -f $HOME/.config/nvim ]; then
+  mkdir $HOME/.config/nvim
+fi
+
 cp -r ./dotfiles/nvim/* $HOME/.config/nvim
 
 # Install vim plugins as listed in the config file
