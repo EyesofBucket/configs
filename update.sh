@@ -50,10 +50,10 @@ cp ./dotfiles/zshrc $HOME/.zshrc
 cp ./dotfiles/vimrc $HOME/.vimrc
 cp ./dotfiles/alias.sh $config_dir/alias.sh
 cp ./dotfiles/eyesofbucket.omp.json $config_dir/eyesofbucket.omp.json
-cp ./dotfiles/tmux.conf $HOME/.tmux.conf
+cp ./dotfiles/tmux.conf $XDG_CONFIG_HOME/tmux/tmux.conf
 
 if [ ! -f $HOME/.config/nvim ]; then
-  mkdir $HOME/.config/nvim
+  mkdir $XDG_CONFIG_HOME/nvim
 fi
 
 cp -r ./dotfiles/nvim/* $HOME/.config/nvim
