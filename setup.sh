@@ -74,5 +74,8 @@ git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 # Install vim-plug
 curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
+# Install Packer
+git clone --depth 1 https://github.com/wbthomason/packer.nvim ~/.local/share/nvim/site/pack/packer/start/packer.nvim
+
 # Run update script
 ./update.sh $all
