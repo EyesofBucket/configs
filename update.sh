@@ -1,7 +1,7 @@
 #!/bin/bash
 
 branch="main"
-config_dir="$HOME/.config/bvkt"
+XDG_CONFIG_HOME="$HOME/.config"
 
 usage(){
 >&2 cat << EOF
@@ -35,35 +35,33 @@ if [ "$EUID" -ne 0 ] && [ "$all" = true ]; then
   exit 1
 fi
 
-# Add bvkt dir if it hasn't already been created
-if [ ! -f $config_dir ]; then
-  mkdir -p $config_dir 
-fi
-
-# Add custom config template if it hasn't already been created
-if [ ! -f $config_dir/custom.sh ]; then
-  cp ./dotfiles/custom.sh $config_dir/custom.sh
-fi
-
 # Add config files
 cp ./dotfiles/zshrc $HOME/.zshrc
 cp ./dotfiles/vimrc $HOME/.vimrc
-cp ./dotfiles/alias.sh $config_dir/alias.sh
-cp ./dotfiles/eyesofbucket.omp.json $config_dir/eyesofbucket.omp.json
-cp ./dotfiles/tmux.conf $XDG_CONFIG_HOME/tmux/tmux.conf
 
-if [ ! -f $HOME/.config/nvim ]; then
-  mkdir $XDG_CONFIG_HOME/nvim
+# bvkt
+if [ ! -f $XDG_CONFIG_HOME/bvkt ]; then; mkdir -p $XDG_CONFIG_HOME/bvkt; fi
+cp -r ./dotfiles/bvkt/* $XDG_CONFIG_HOME/bvkt
+
+# tmux
+if [ ! -f $XDG_CONFIG_HOME/tmux ]; then; mkdir -p $XDG_CONFIG_HOME/tmux; fi
+cp -r ./dotfiles/tmux/* $XDG_CONFIG_HOME/tmux
+
+# nvim
+if [ ! -f $XDG_CONFIG_HOME/nvim ]; then; mkdir -p $XDG_CONFIG_HOME/nvim; fi
+cp -r ./dotfiles/nvim/* $XDG_CONFIG_HOME/nvim
+
+# Add custom config template if it hasn't already been created
+if [ ! -f $XDG_CONFIG_HOME/bvkt/custom.sh ]; then
+  cp ./dotfiles/custom.sh $XDG_CONFIG_HOME/bvkt/custom.sh
 fi
-
-cp -r ./dotfiles/nvim/* $HOME/.config/nvim
 
 # Install vim plugins as listed in the config file
 vim --not-a-term -c "PlugInstall" -c "%w /tmp/vim.log" -c "qa" >/dev/null
 cat /tmp/vim.log
 
 # Install neovim plugins
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync quitall'
 
 if [ "$all" = true ]; then
   cp ./dotfiles/sudoers_eyesofbucket /etc/sudoers.d/eyesofbucket
