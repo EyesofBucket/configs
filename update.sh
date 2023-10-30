@@ -61,7 +61,7 @@ vim --not-a-term -c "PlugInstall" -c "%w /tmp/vim.log" -c "qa" >/dev/null
 cat /tmp/vim.log
 
 # Install neovim plugins
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync quitall'
+nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
 
 if [ "$all" = true ]; then
   cp ./dotfiles/sudoers_eyesofbucket /etc/sudoers.d/eyesofbucket
