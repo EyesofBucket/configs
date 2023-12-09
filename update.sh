@@ -23,7 +23,6 @@ do
   case $1 in
     -a | --all)  all=true ; shift ;;
     -h | --help) usage    ; shift ;;
-    # -- means the end of the arguments. Shift and break out of the while loop
     --) shift; break ;;
     *) >&2 echo Unsupported option: $1
        usage ;;
@@ -48,8 +47,8 @@ if [ ! -f $XDG_CONFIG_HOME/tmux ]; then mkdir -p $XDG_CONFIG_HOME/tmux; fi
 cp -r ./dotfiles/tmux/* $XDG_CONFIG_HOME/tmux
 
 # nvim
-if [ ! -f $XDG_CONFIG_HOME/nvim ]; then mkdir -p $XDG_CONFIG_HOME/nvim; fi
-cp -r ./dotfiles/nvim/* $XDG_CONFIG_HOME/nvim
+if [ ! -f "$XDG_CONFIG_HOME/nvim" ]; then mkdir -p "$XDG_CONFIG_HOME/nvim"; fi
+git clone https://github.com/eyesofbucket/nvim-config.git "$XDG_CONFIG_HOME/nvim"
 
 # Add custom config template if it hasn't already been created
 if [ ! -f $XDG_CONFIG_HOME/bvkt/custom.sh ]; then
