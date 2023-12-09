@@ -41,6 +41,9 @@ cmp.setup({
 })
 
 require('mason').setup({})
+
+vim.keymap.set('n', '<leader>pm', "<CMD>Mason<CR>")
+
 require('mason-lspconfig').setup({
   ensure_installed = {
       'lua_ls',
